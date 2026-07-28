@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creative Media: Divine Glo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Instrument+Serif:ital@1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --near-black: #0A0A0C;
+    --warm-white: #F5F4F1;
+    --steel-blue: #4A6FA5;
+    --cool-lavender: #C9C3E0;
+    --warm-gray: #8B8681;
+    --acid-green: #E4F577;
+    --electric-violet: #4940F4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--near-black);
+    color: var(--warm-white);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .display {
+    font-family: 'Boldonse', 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  .kicker {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8vh 6vw 6vh;
+    position: relative;
+    overflow: hidden;
+    background: var(--near-black);
+  }
+
+  .hero-field {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 20%, var(--electric-violet) 0%, transparent 45%),
+      radial-gradient(circle at 85% 75%, var(--acid-green) 0%, transparent 40%);
+    opacity: 0.55;
+    filter: blur(90px);
+    pointer-events: none;
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift {
+    from { transform: scale(1) translate(0, 0); }
+    to { transform: scale(1.15) translate(3%, -3%); }
+  }
+
+  .hero-kicker {
+    font-size: clamp(1.1rem, 2vw, 1.7rem);
+    color: var(--acid-green);
+    margin-bottom: 1.2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 9vw, 7rem);
+    line-height: 0.94;
+    text-transform: uppercase;
+    max-width: 18ch;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero p {
+    margin-top: 1.8rem;
+    max-width: 46ch;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--warm-white);
+    opacity: 0.8;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tags {
+    margin-top: 2.6rem;
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(245,244,241,0.25);
+    color: var(--warm-white);
+  }
+
+  .hero-tag.filled {
+    background: var(--electric-violet);
+    border-color: var(--electric-violet);
+    color: var(--warm-white);
+  }
+
+  /* ---------- SECTION TEMPLATE ---------- */
+  .section {
+    padding: 6rem 0 3rem;
+    position: relative;
+    scroll-margin-top: 2rem;
+    overflow: hidden;
+  }
+
+  .section-wash {
+    position: absolute;
+    inset: 0;
+    opacity: 0.14;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .section-head {
+    padding: 0 6vw;
+    margin-bottom: 2.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-head .index {
+    font-size: 0.78rem;
+    color: var(--acid-green);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.7rem;
+    display: block;
+    font-weight: 500;
+  }
+
+  .section-head h2 {
+    font-size: clamp(2rem, 3.6vw, 2.8rem);
+    text-transform: uppercase;
+  }
+
+  .section-head .frame {
+    font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+    color: var(--cool-lavender);
+    max-width: 34ch;
+    text-align: right;
+  }
+
+  /* ---------- ROW + PAGINATION ---------- */
+  .row-wrap {
+    position: relative;
+    padding: 0 6vw;
+    z-index: 1;
+  }
+
+  .shopify-slot {
+    border: 2px dashed var(--electric-violet);
+    border-radius: 16px;
+    padding: 2.4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    background: rgba(73,64,244,0.08);
+  }
+
+  .shopify-slot .placeholder-badge {
+    align-self: flex-start;
+  }
+
+  .shopify-slot .placeholder-note {
+    font-size: 0.85rem;
+    opacity: 0.75;
+    max-width: 56ch;
+    line-height: 1.55;
+  }
+
+  .payhip-mark {
+    position: absolute;
+    top: 0.7rem;
+    left: 0.7rem;
+    background: rgba(228,245,119,0.9);
+    color: var(--near-black);
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    z-index: 1;
+    font-weight: 500;
+  }
+
+  .row-scroll {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.4rem 0 1.4rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    scrollbar-width: none;
+  }
+  .row-scroll::-webkit-scrollbar { display: none; }
+  .row-scroll.dragging { cursor: grabbing; }
+
+  .row-arrow {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: rgba(245,244,241,0.1);
+    border: 1px solid rgba(245,244,241,0.2);
+    color: var(--warm-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    backdrop-filter: blur(6px);
+    transition: background 0.2s ease;
+    z-index: 2;
+  }
+
+  .row-arrow:hover { background: var(--electric-violet); }
+  .row-arrow.prev { left: 1.5vw; }
+  .row-arrow.next { right: 1.5vw; }
+
+  .pagination {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 0.4rem 0 0;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: rgba(245,244,241,0.25);
+    transition: background 0.2s ease, width 0.2s ease;
+  }
+
+  .dot.active {
+    background: var(--acid-green);
+    width: 20px;
+  }
+
+  /* ---------- CARD ---------- */
+  .card {
+    flex: 0 0 auto;
+    width: 260px;
+    scroll-snap-align: start;
+    background: rgba(245,244,241,0.05);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(245,244,241,0.14);
+    backdrop-filter: blur(8px);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: var(--acid-green);
+  }
+
+  .card-media {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(245,244,241,0.06),
+      rgba(245,244,241,0.06) 10px,
+      rgba(245,244,241,0.02) 10px,
+      rgba(245,244,241,0.02) 20px
+    );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    color: var(--warm-white);
+    position: relative;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .placeholder-badge {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--electric-violet);
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+  }
+
+  .placeholder-note {
+    font-size: 0.72rem;
+    opacity: 0.55;
+    max-width: 20ch;
+  }
+
+  .creator-mark {
+    position: absolute;
+    top: 0.7rem;
+    left: 0.7rem;
+    background: rgba(10,10,12,0.6);
+    backdrop-filter: blur(4px);
+    color: var(--warm-white);
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    z-index: 1;
+  }
+
+  .card-body {
+    padding: 1rem 1.1rem 1.2rem;
+  }
+
+  .card-body h3 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  .card-body .price {
+    font-size: 0.85rem;
+    color: var(--acid-green);
+    font-weight: 500;
+  }
+
+  .card-link-placeholder {
+    margin-top: 0.7rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--cool-lavender);
+    border: 1px dashed rgba(201,195,224,0.4);
+    padding: 0.5rem 0.6rem;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .section-head { flex-direction: column; align-items: flex-start; }
+    .section-head .frame { text-align: left; }
+    .card { width: 200px; }
+    .row-arrow { display: none; }
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--acid-green);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-field"></div>
+  <span class="hero-kicker kicker">seven lanes, one agency</span>
+  <h1 class="display">CREATIVE MEDIA</h1>
+  <p>Art, AI tools, video, writing, books, journals, and merch. Every medium this agency works in, in one place, built to grow as the work does.</p>
+  <div class="hero-tags">
+    <span class="hero-tag filled">Art</span>
+    <span class="hero-tag">AI</span>
+    <span class="hero-tag">Video</span>
+    <span class="hero-tag">Publication</span>
+    <span class="hero-tag">Books</span>
+    <span class="hero-tag">For The Scribes</span>
+    <span class="hero-tag">Fashion</span>
+  </div>
+</section>
+
+<!-- ============================================= -->
+<!-- SECTION TEMPLATE: duplicate this whole block   -->
+<!-- per category. change: --wash-a / --wash-b vars, -->
+<!-- index number, headline, frame line, and cards.  -->
+<!-- ============================================= -->
+<section class="section" id="art">
+  <div class="section-wash" style="background: linear-gradient(120deg, #4940F4 0%, transparent 55%), linear-gradient(300deg, #E4F577 0%, transparent 55%);"></div>
+  <div class="section-head">
+    <div>
+      <span class="index">01 / 07</span>
+      <h2 class="display">Art</h2>
+    </div>
+    <p class="frame kicker">original work, one lane of the agency</p>
+  </div>
+
+  <div class="row-wrap">
+    <div class="shopify-slot">
+      <span class="placeholder-badge">ShopifyConnect Product Listing</span>
+      <p class="placeholder-note">Single-store section. In Framer, delete this box and drop in ShopifyConnect's Product Listing component here, pointed at this store's Art collection. It has its own pagination and card layout built in, so the custom row/dots below are not needed for this section.</p>
+    </div>
+  </div>
+</section>
+<!-- ============ END SECTION TEMPLATE ============ -->
+
+<section class="section" id="ai">
+  <div class="section-wash" style="background: linear-gradient(120deg, #E4F577 0%, transparent 55%), linear-gradient(300deg, #4A6FA5 0%, transparent 55%);"></div>
+  <div class="section-head">
+    <div>
+      <span class="index">02 / 07</span>
+      <h2 class="display">AI</h2>
+    </div>
+    <p class="frame kicker">tools built from the systems that run this agency</p>
+  </div>
+  <div class="row-wrap">
+    <div class="shopify-slot">
+      <span class="placeholder-badge">ShopifyConnect Product Listing</span>
+      <p class="placeholder-note">Single-store section. In Framer, delete this box and drop in ShopifyConnect's Product Listing component here, pointed at this store's AI collection.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="video">
+  <div class="section-wash" style="background: linear-gradient(120deg, #4940F4 0%, transparent 55%), linear-gradient(300deg, #C9C3E0 0%, transparent 55%);"></div>
+  <div class="section-head">
+    <div>
+      <span class="index">03 / 07</span>
+      <h2 class="display">Video</h2>
+    </div>
+    <p class="frame kicker">recordings and video products</p>
+  </div>
+  <div class="row-wrap">
+    <button class="row-arrow prev" aria-label="Scroll left">‹</button>
+    <button class="row-arrow next" aria-label="Scroll right">›</button>
+    <div class="row-scroll" data-scroll>
+      <article class="card">
+        <div class="card-media">
+          <span class="creator-mark">[ Creator Name ]</span>
+          <span class="placeholder-badge">Image / Embed</span>
+          <span class="placeholder-note">Drop product photo or Shopify/Payhip embed here</span>
+        </div>
+        <div class="card-body">
+          <h3>[ Product Name ]</h3>
+          <span class="price">[ $ Price ]</span>
+          <div class="card-link-placeholder">[ Link or Buy Button Goes Here ]</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media">
+          <span class="creator-mark">[ Creator Name ]</span>
+          <span class="placeholder-badge">Image / Embed</span>
+          <span class="placeholder-note">Drop product photo or Shopify/Payhip embed here</span>
+        </div>
+        <div class="card-body">
+          <h3>[ Product Name ]</h3>
+          <span class="price">[ $ Price ]</span>
+          <div class="card-link-placeholder">[ Link or Buy Button Goes Here ]</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media">
+          <span class="creator-mark">[ Creator Name ]</span>
+          <span class="placeholder-badge">Image / Embed</span>
+          <span class="placeholder-note">Drop product photo or Shopify/Payhip embed here</span>
+        </div>
+        <div class="card-body">
+          <h3>[ Product Name ]</h3>
+          <span class="price">[ $ Price ]</span>
+          <div class="card-link-placeholder">[ Link or Buy Button Goes Here ]</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media">
+          <span class="creator-mark">[ Creator Name ]</span>
+          <span class="placeholder-badge">Image / Embed</span>
+          <span class="placeholder-note">Drop product photo or Shopify/Payhip embed here</span>
+        </div>
+        <div class="card-body">
+          <h3>[ Product Name ]</h3>
+          <span class="price">[ $ Price ]</span>
+          <div class="card-link-placeholder">[ Link or Buy Button Goes Here ]</div>
+        </div>
+      </article>
+    </div>
+    <div class="pagination" data-pagination>
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="publication">
+  <div class="section-wash" style="background: linear-gradient(120deg, #C9C3E0 0%, transparent 55%), linear-gradient(300deg, #E4F577 0%, transparent 55%);"></div>
+  <div class="section-head">
+    <div>
+      <span class="index">04 / 07</span>
+      <h2 class="display">Publication</h2>
+    </div>
+    <p class="frame kicker">our publication, open to read</p>
+  </div>
+  <div class="row-wrap">
+    <button class="row-arrow prev" aria-label="Scroll left">‹</button>
+    <button class="row-arrow next" aria-label="Scroll right">›</button>
+    <div class="row-scroll" data-scroll>
+      <article class="card">
+        <div class="card-media">
+          <span class="placeholder-badge">Image / Embed</span>
+          <span class="placeholder-note">Drop Substack embed or link here</span>
+        </div>
+        <div class="card-body">
+          <h3>[ Post or Publication Name ]</h3>
+          <span class="price">[ Free to read ]</span>
+          <div class="card-link-placeholder">[ Link Goes Here ]</div>
+        </div>
+      </article>
+    </div>
+    <div class="pagination" data-pagination>
+      <span class="dot active"></span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="books">
+  <div class="section-wash" style="background: linear-gradient(120deg, #E4F577 0%, transparent 55%), linear-gradient(300deg, #4940F4 0%, transparent 55%);"></div>
+  <div class="section-head">
+    <div>
+      <span class="index">05 / 07</span>
+      <h2 class="display">Books</h2>
+    </div>
+    <p class="frame kicker">organized by what each one is for</p>
+  </div>
+  <div class="row-wrap">
+    <div class="shopify-slot">
+      <span class="placeholder-badge">ShopifyConnect Product Listing</span>
+      <p class="placeholder-note">Single-store section. In Framer, delete this box and drop in ShopifyConnect's Product Listing component here, pointed at this store's Books collection. Use its filter/sort options to organize by topic (starting with faith-based self-help).</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="for-the-scribes">
+  <div class="section-wash" style="background: linear-gradient(120deg, #4A6FA5 0%, transparent 55%), linear-gradient(300deg, #E4F577 0%, transparent 55%);"></div>
+  <div class="section-head">
+    <div>
+      <span class="index">06 / 07</span>
+      <h2 class="display">For The Scribes</h2>
+    </div>
+    <p class="frame kicker">journals and goods, made for your own words</p>
+  </div>
+  <div class="row-wrap">
+    <button class="row-arrow prev" aria-label="Scroll left">‹</button>
+    <button class="row-arrow next" aria-label="Scroll right">›</button>
+    <div class="row-scroll" data-scroll>
+
+      <!-- SHOPIFY CARD (individual pieces): duplicate per Shopify product -->
+      <article class="card">
+        <div class="card-media">
+          <span class="creator-mark">[ Creator Name ]</span>
+          <span class="placeholder-badge">ShopifyConnect Card</span>
+          <span class="placeholder-note">Drop ShopifyConnect's single Product Card component here</span>
+        </div>
+        <div class="card-body">
+          <h3>[ Product Name ]</h3>
+          <span class="price">[ $ Price ]</span>
+        </div>
+      </article>
+
+      <!-- PAYHIP CARD (joint pieces): duplicate per Payhip product -->
+      <article class="card">
+        <div class="card-media">
+          <span class="payhip-mark">Joint / Payhip</span>
+          <span class="placeholder-badge">Payhip Embed</span>
+          <span class="placeholder-note">Drop Payhip product embed or buy button here</span>
+        </div>
+        <div class="card-body">
+          <h3>[ Product Name ]</h3>
+          <span class="price">[ $ Price ]</span>
+          <div class="card-link-placeholder">[ Payhip Link Goes Here ]</div>
+        </div>
+      </article>
+
+      <!-- SHOPIFY CARD -->
+      <article class="card">
+        <div class="card-media">
+          <span class="creator-mark">[ Creator Name ]</span>
+          <span class="placeholder-badge">ShopifyConnect Card</span>
+          <span class="placeholder-note">Drop ShopifyConnect's single Product Card component here</span>
+        </div>
+        <div class="card-body">
+          <h3>[ Product Name ]</h3>
+          <span class="price">[ $ Price ]</span>
+        </div>
+      </article>
+
+      <!-- SHOPIFY CARD -->
+      <article class="card">
+        <div class="card-media">
+          <span class="creator-mark">[ Creator Name ]</span>
+          <span class="placeholder-badge">ShopifyConnect Card</span>
+          <span class="placeholder-note">Drop ShopifyConnect's single Product Card component here</span>
+        </div>
+        <div class="card-body">
+          <h3>[ Product Name ]</h3>
+          <span class="price">[ $ Price ]</span>
+        </div>
+      </article>
+
+    </div>
+    <div class="pagination" data-pagination>
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="fashion">
+  <div class="section-wash" style="background: linear-gradient(120deg, #E4F577 0%, transparent 55%), linear-gradient(300deg, #4940F4 0%, transparent 55%);"></div>
+  <div class="section-head">
+    <div>
+      <span class="index">07 / 07</span>
+      <h2 class="display">Fashion</h2>
+    </div>
+    <p class="frame kicker">wearable pieces from the agency</p>
+  </div>
+  <div class="row-wrap">
+    <button class="row-arrow prev" aria-label="Scroll left">‹</button>
+    <button class="row-arrow next" aria-label="Scroll right">›</button>
+    <div class="row-scroll" data-scroll>
+
+      <!-- SHOPIFY CARD (individual pieces): duplicate per Shopify product -->
+      <article class="card">
+        <div class="card-media">
+          <span class="creator-mark">[ Creator Name ]</span>
+          <span class="placeholder-badge">ShopifyConnect Card</span>
+          <span class="placeholder-note">Drop ShopifyConnect's single Product Card component here</span>
+        </div>
+        <div class="card-body">
+          <h3>[ Product Name ]</h3>
+          <span class="price">[ $ Price ]</span>
+        </div>
+      </article>
+
+      <!-- SHOPIFY CARD -->
+      <article class="card">
+        <div class="card-media">
+          <span class="creator-mark">[ Creator Name ]</span>
+          <span class="placeholder-badge">ShopifyConnect Card</span>
+          <span class="placeholder-note">Drop ShopifyConnect's single Product Card component here</span>
+        </div>
+        <div class="card-body">
+          <h3>[ Product Name ]</h3>
+          <span class="price">[ $ Price ]</span>
+        </div>
+      </article>
+
+      <!-- PAYHIP CARD (joint pieces): duplicate per Payhip product -->
+      <article class="card">
+        <div class="card-media">
+          <span class="payhip-mark">Joint / Payhip</span>
+          <span class="placeholder-badge">Payhip Embed</span>
+          <span class="placeholder-note">Drop Payhip product embed or buy button here</span>
+        </div>
+        <div class="card-body">
+          <h3>[ Product Name ]</h3>
+          <span class="price">[ $ Price ]</span>
+          <div class="card-link-placeholder">[ Payhip Link Goes Here ]</div>
+        </div>
+      </article>
+
+      <!-- SHOPIFY CARD -->
+      <article class="card">
+        <div class="card-media">
+          <span class="creator-mark">[ Creator Name ]</span>
+          <span class="placeholder-badge">ShopifyConnect Card</span>
+          <span class="placeholder-note">Drop ShopifyConnect's single Product Card component here</span>
+        </div>
+        <div class="card-body">
+          <h3>[ Product Name ]</h3>
+          <span class="price">[ $ Price ]</span>
+        </div>
+      </article>
+
+    </div>
+    <div class="pagination" data-pagination>
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.section').forEach(section => {
+    const row = section.querySelector('[data-scroll]');
+    if (!row) return;
+
+    const prevBtn = section.querySelector('.row-arrow.prev');
+    const nextBtn = section.querySelector('.row-arrow.next');
+    const dots = section.querySelectorAll('.dot');
+    const cardWidth = 276; // card width + gap, adjust if card size changes
+
+    // Arrow scroll
+    prevBtn?.addEventListener('click', () => row.scrollBy({ left: -cardWidth * 2, behavior: 'smooth' }));
+    nextBtn?.addEventListener('click', () => row.scrollBy({ left: cardWidth * 2, behavior: 'smooth' }));
+
+    // Drag to scroll
+    let isDown = false, startX, scrollLeft;
+    row.addEventListener('mousedown', e => {
+      isDown = true;
+      row.classList.add('dragging');
+      startX = e.pageX - row.offsetLeft;
+      scrollLeft = row.scrollLeft;
+    });
+    ['mouseleave', 'mouseup'].forEach(evt =>
+      row.addEventListener(evt, () => { isDown = false; row.classList.remove('dragging'); })
+    );
+    row.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - row.offsetLeft;
+      row.scrollLeft = scrollLeft - (x - startX) * 1.2;
+    });
+
+    // Pagination dot sync
+    row.addEventListener('scroll', () => {
+      const index = Math.round(row.scrollLeft / cardWidth);
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === Math.min(index, dots.length - 1)));
+    });
+  });
+</script>
+
+</body>
+</html>
